@@ -1,0 +1,19 @@
+---
+config:
+        target: "https://aol81v9mi1.execute-api.ap-northeast-2.amazonaws.com"
+        phases:
+                - duration: 10
+                  arrivalRate: 10
+        defaults:
+                headers:
+                        Content-Type: "application/json"
+variables:
+        uid: "{{ &randomInt(1,1000) }}"
+scenarios:
+        - flow:
+                - post:
+                        url: "/prod/reserve"
+                        json:
+                                eventId: "test-event-dup"
+                                seatId: "DY127"
+                                userId: "user-{{ uid }}"

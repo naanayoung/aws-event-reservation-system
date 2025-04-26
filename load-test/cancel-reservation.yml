@@ -1,0 +1,13 @@
+---
+config:
+        target: "https://aol81v9mi1.execute-api.ap-northeast-2.amazonaws.com"
+        phases:
+                - duration: 10
+                  arrivalRate: 5
+        defaults:
+                headers:
+                        Content-Type: "application/json"  
+scenarios:
+        - flow: 
+                - delete:
+                        url: "/prod/cancel-reservation?eventId=DearYouth&seatId=A5&userId=YOUNG"

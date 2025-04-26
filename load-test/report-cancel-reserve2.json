@@ -1,0 +1,455 @@
+{
+  "aggregate": {
+    "counters": {
+      "vusers.created_by_name.0": 50,
+      "vusers.created": 50,
+      "http.requests": 50,
+      "http.codes.403": 49,
+      "http.responses": 50,
+      "http.downloaded_bytes": 2988,
+      "plugins.metrics-by-endpoint./prod/cancel-reservation.codes.403": 49,
+      "vusers.failed": 0,
+      "vusers.completed": 50,
+      "http.codes.200": 1,
+      "plugins.metrics-by-endpoint./prod/cancel-reservation.codes.200": 1
+    },
+    "rates": {
+      "http.request_rate": 5
+    },
+    "firstCounterAt": 1745052081240,
+    "firstHistogramAt": 1745052082538,
+    "lastCounterAt": 1745052090546,
+    "lastHistogramAt": 1745052090546,
+    "firstMetricAt": 1745052081240,
+    "lastMetricAt": 1745052090546,
+    "period": 1745052090000,
+    "summaries": {
+      "http.response_time": {
+        "min": 40,
+        "max": 1211,
+        "count": 50,
+        "mean": 284.3,
+        "p50": 76,
+        "median": 76,
+        "p75": 127.8,
+        "p90": 1130.2,
+        "p95": 1176.4,
+        "p99": 1200.1,
+        "p999": 1200.1
+      },
+      "http.response_time.4xx": {
+        "min": 40,
+        "max": 1211,
+        "count": 49,
+        "mean": 268.1,
+        "p50": 76,
+        "median": 76,
+        "p75": 127.8,
+        "p90": 1130.2,
+        "p95": 1176.4,
+        "p99": 1200.1,
+        "p999": 1200.1
+      },
+      "plugins.metrics-by-endpoint.response_time./prod/cancel-reservation": {
+        "min": 40,
+        "max": 1211,
+        "count": 50,
+        "mean": 284.3,
+        "p50": 76,
+        "median": 76,
+        "p75": 127.8,
+        "p90": 1130.2,
+        "p95": 1176.4,
+        "p99": 1200.1,
+        "p999": 1200.1
+      },
+      "vusers.session_length": {
+        "min": 79.5,
+        "max": 2196.5,
+        "count": 50,
+        "mean": 357.3,
+        "p50": 127.8,
+        "median": 127.8,
+        "p75": 194.4,
+        "p90": 1200.1,
+        "p95": 1274.3,
+        "p99": 1380.5,
+        "p999": 1380.5
+      },
+      "http.response_time.2xx": {
+        "min": 1078,
+        "max": 1078,
+        "count": 1,
+        "mean": 1078,
+        "p50": 1085.9,
+        "median": 1085.9,
+        "p75": 1085.9,
+        "p90": 1085.9,
+        "p95": 1085.9,
+        "p99": 1085.9,
+        "p999": 1085.9
+      }
+    },
+    "histograms": {
+      "http.response_time": {
+        "min": 40,
+        "max": 1211,
+        "count": 50,
+        "mean": 284.3,
+        "p50": 76,
+        "median": 76,
+        "p75": 127.8,
+        "p90": 1130.2,
+        "p95": 1176.4,
+        "p99": 1200.1,
+        "p999": 1200.1
+      },
+      "http.response_time.4xx": {
+        "min": 40,
+        "max": 1211,
+        "count": 49,
+        "mean": 268.1,
+        "p50": 76,
+        "median": 76,
+        "p75": 127.8,
+        "p90": 1130.2,
+        "p95": 1176.4,
+        "p99": 1200.1,
+        "p999": 1200.1
+      },
+      "plugins.metrics-by-endpoint.response_time./prod/cancel-reservation": {
+        "min": 40,
+        "max": 1211,
+        "count": 50,
+        "mean": 284.3,
+        "p50": 76,
+        "median": 76,
+        "p75": 127.8,
+        "p90": 1130.2,
+        "p95": 1176.4,
+        "p99": 1200.1,
+        "p999": 1200.1
+      },
+      "vusers.session_length": {
+        "min": 79.5,
+        "max": 2196.5,
+        "count": 50,
+        "mean": 357.3,
+        "p50": 127.8,
+        "median": 127.8,
+        "p75": 194.4,
+        "p90": 1200.1,
+        "p95": 1274.3,
+        "p99": 1380.5,
+        "p999": 1380.5
+      },
+      "http.response_time.2xx": {
+        "min": 1078,
+        "max": 1078,
+        "count": 1,
+        "mean": 1078,
+        "p50": 1085.9,
+        "median": 1085.9,
+        "p75": 1085.9,
+        "p90": 1085.9,
+        "p95": 1085.9,
+        "p99": 1085.9,
+        "p999": 1085.9
+      }
+    }
+  },
+  "intermediate": [
+    {
+      "counters": {
+        "vusers.created_by_name.0": 45,
+        "vusers.created": 45,
+        "http.requests": 45,
+        "http.codes.403": 44,
+        "http.responses": 45,
+        "http.downloaded_bytes": 2688,
+        "plugins.metrics-by-endpoint./prod/cancel-reservation.codes.403": 44,
+        "vusers.failed": 0,
+        "vusers.completed": 45,
+        "http.codes.200": 1,
+        "plugins.metrics-by-endpoint./prod/cancel-reservation.codes.200": 1
+      },
+      "rates": {
+        "http.request_rate": 5
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1745052081240,
+      "firstHistogramAt": 1745052082538,
+      "lastCounterAt": 1745052089530,
+      "lastHistogramAt": 1745052089530,
+      "firstMetricAt": 1745052081240,
+      "lastMetricAt": 1745052089530,
+      "period": "1745052080000",
+      "summaries": {
+        "http.response_time": {
+          "min": 40,
+          "max": 1211,
+          "count": 45,
+          "mean": 308.5,
+          "p50": 83.9,
+          "median": 83.9,
+          "p75": 214.9,
+          "p90": 1130.2,
+          "p95": 1176.4,
+          "p99": 1200.1,
+          "p999": 1200.1
+        },
+        "http.response_time.4xx": {
+          "min": 40,
+          "max": 1211,
+          "count": 44,
+          "mean": 291,
+          "p50": 80.6,
+          "median": 80.6,
+          "p75": 179.5,
+          "p90": 1130.2,
+          "p95": 1176.4,
+          "p99": 1200.1,
+          "p999": 1200.1
+        },
+        "plugins.metrics-by-endpoint.response_time./prod/cancel-reservation": {
+          "min": 40,
+          "max": 1211,
+          "count": 45,
+          "mean": 308.5,
+          "p50": 83.9,
+          "median": 83.9,
+          "p75": 214.9,
+          "p90": 1130.2,
+          "p95": 1176.4,
+          "p99": 1200.1,
+          "p999": 1200.1
+        },
+        "vusers.session_length": {
+          "min": 79.5,
+          "max": 2196.5,
+          "count": 45,
+          "mean": 385.2,
+          "p50": 130.3,
+          "median": 130.3,
+          "p75": 290.1,
+          "p90": 1200.1,
+          "p95": 1274.3,
+          "p99": 1380.5,
+          "p999": 1380.5
+        },
+        "http.response_time.2xx": {
+          "min": 1078,
+          "max": 1078,
+          "count": 1,
+          "mean": 1078,
+          "p50": 1085.9,
+          "median": 1085.9,
+          "p75": 1085.9,
+          "p90": 1085.9,
+          "p95": 1085.9,
+          "p99": 1085.9,
+          "p999": 1085.9
+        }
+      },
+      "histograms": {
+        "http.response_time": {
+          "min": 40,
+          "max": 1211,
+          "count": 45,
+          "mean": 308.5,
+          "p50": 83.9,
+          "median": 83.9,
+          "p75": 214.9,
+          "p90": 1130.2,
+          "p95": 1176.4,
+          "p99": 1200.1,
+          "p999": 1200.1
+        },
+        "http.response_time.4xx": {
+          "min": 40,
+          "max": 1211,
+          "count": 44,
+          "mean": 291,
+          "p50": 80.6,
+          "median": 80.6,
+          "p75": 179.5,
+          "p90": 1130.2,
+          "p95": 1176.4,
+          "p99": 1200.1,
+          "p999": 1200.1
+        },
+        "plugins.metrics-by-endpoint.response_time./prod/cancel-reservation": {
+          "min": 40,
+          "max": 1211,
+          "count": 45,
+          "mean": 308.5,
+          "p50": 83.9,
+          "median": 83.9,
+          "p75": 214.9,
+          "p90": 1130.2,
+          "p95": 1176.4,
+          "p99": 1200.1,
+          "p999": 1200.1
+        },
+        "vusers.session_length": {
+          "min": 79.5,
+          "max": 2196.5,
+          "count": 45,
+          "mean": 385.2,
+          "p50": 130.3,
+          "median": 130.3,
+          "p75": 290.1,
+          "p90": 1200.1,
+          "p95": 1274.3,
+          "p99": 1380.5,
+          "p999": 1380.5
+        },
+        "http.response_time.2xx": {
+          "min": 1078,
+          "max": 1078,
+          "count": 1,
+          "mean": 1078,
+          "p50": 1085.9,
+          "median": 1085.9,
+          "p75": 1085.9,
+          "p90": 1085.9,
+          "p95": 1085.9,
+          "p99": 1085.9,
+          "p999": 1085.9
+        }
+      }
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.0": 5,
+        "vusers.created": 5,
+        "http.requests": 5,
+        "http.codes.403": 5,
+        "http.responses": 5,
+        "http.downloaded_bytes": 300,
+        "plugins.metrics-by-endpoint./prod/cancel-reservation.codes.403": 5,
+        "vusers.failed": 0,
+        "vusers.completed": 5
+      },
+      "rates": {
+        "http.request_rate": 5
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1745052090239,
+      "firstHistogramAt": 1745052090348,
+      "lastCounterAt": 1745052090546,
+      "lastHistogramAt": 1745052090546,
+      "firstMetricAt": 1745052090239,
+      "lastMetricAt": 1745052090546,
+      "period": "1745052090000",
+      "summaries": {
+        "http.response_time": {
+          "min": 58,
+          "max": 74,
+          "count": 5,
+          "mean": 66.6,
+          "p50": 66,
+          "median": 66,
+          "p75": 70.1,
+          "p90": 70.1,
+          "p95": 70.1,
+          "p99": 70.1,
+          "p999": 70.1
+        },
+        "http.response_time.4xx": {
+          "min": 58,
+          "max": 74,
+          "count": 5,
+          "mean": 66.6,
+          "p50": 66,
+          "median": 66,
+          "p75": 70.1,
+          "p90": 70.1,
+          "p95": 70.1,
+          "p99": 70.1,
+          "p999": 70.1
+        },
+        "plugins.metrics-by-endpoint.response_time./prod/cancel-reservation": {
+          "min": 58,
+          "max": 74,
+          "count": 5,
+          "mean": 66.6,
+          "p50": 66,
+          "median": 66,
+          "p75": 70.1,
+          "p90": 70.1,
+          "p95": 70.1,
+          "p99": 70.1,
+          "p999": 70.1
+        },
+        "vusers.session_length": {
+          "min": 97,
+          "max": 113.3,
+          "count": 5,
+          "mean": 106,
+          "p50": 104.6,
+          "median": 104.6,
+          "p75": 108.9,
+          "p90": 108.9,
+          "p95": 108.9,
+          "p99": 108.9,
+          "p999": 108.9
+        }
+      },
+      "histograms": {
+        "http.response_time": {
+          "min": 58,
+          "max": 74,
+          "count": 5,
+          "mean": 66.6,
+          "p50": 66,
+          "median": 66,
+          "p75": 70.1,
+          "p90": 70.1,
+          "p95": 70.1,
+          "p99": 70.1,
+          "p999": 70.1
+        },
+        "http.response_time.4xx": {
+          "min": 58,
+          "max": 74,
+          "count": 5,
+          "mean": 66.6,
+          "p50": 66,
+          "median": 66,
+          "p75": 70.1,
+          "p90": 70.1,
+          "p95": 70.1,
+          "p99": 70.1,
+          "p999": 70.1
+        },
+        "plugins.metrics-by-endpoint.response_time./prod/cancel-reservation": {
+          "min": 58,
+          "max": 74,
+          "count": 5,
+          "mean": 66.6,
+          "p50": 66,
+          "median": 66,
+          "p75": 70.1,
+          "p90": 70.1,
+          "p95": 70.1,
+          "p99": 70.1,
+          "p999": 70.1
+        },
+        "vusers.session_length": {
+          "min": 97,
+          "max": 113.3,
+          "count": 5,
+          "mean": 106,
+          "p50": 104.6,
+          "median": 104.6,
+          "p75": 108.9,
+          "p90": 108.9,
+          "p95": 108.9,
+          "p99": 108.9,
+          "p999": 108.9
+        }
+      }
+    }
+  ]
+}

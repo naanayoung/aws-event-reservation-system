@@ -1,0 +1,23 @@
+config:
+        target: "https://aol81v9mi1.execute-api.ap-northeast-2.amazonaws.com"
+        phases:
+                - duration: 5
+                  arrivalRate: 20
+        payload:
+                path: "users.csv"
+                fields:
+                        - "userId"
+                        - "seatId"
+        defaults:
+                headers:
+                        Content-Type: "application/json"
+scenarios:
+        - name: "sns-notification-test"
+          flow:
+                - post:
+                        url: "/prod/reserve"
+                        json:
+                                eventId: "test-sns-noti"
+                                seatId: "{{ seatId }}"
+                                userId: "{{ userId }}"
+

@@ -1,0 +1,7 @@
+{"message":"Missing event body"}--_curl_--
+           "even>            "eventId": "event123"
+--_curl_--
+>            "seatId": "seatK1"
+--_curl_-- 
+>            "userId": "userHC" 
+>          

@@ -1,14 +1,26 @@
-# Welcome to your CDK TypeScript project
+# event reservation system using AWS
 
-This is a blank project for CDK development with TypeScript.
+## 목적
+aws 리소스를 활용한 클라우드 아키텍처 설계 및 운영 연습
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## 다이어그램
 
-## Useful commands
-
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+## 스택
+- o
+  - Ubuntu
+  - bash
+  - cdk
+- aws 리소스
+  - CloudFormation
+  - VPC
+  - ALB
+  - ASG
+  - NAT Gateway
+  - EC2
+  - Lambda
+  - DynamoDB
+  - RDS for MySQL
+  - SQS
+  - SNS
+  - IAM
+  - SG

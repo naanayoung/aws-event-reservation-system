@@ -1,5 +1,3 @@
-// processReservation.ts
-
 import { SQSEvent } from "aws-lambda";
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
@@ -21,9 +19,8 @@ export const handler = async (event: SQSEvent) => {
     const results = [];
 
     for (const record of event.Records) {
+	const { eventId, seatId, userId } = JSON.parse(record.body);
         try {
-            const { eventId, seatId, userId } = JSON.parse(record.body);
-
             const params = {
                 TableName: TABLE_NAME,
                 Item: marshall({ eventId, seatId, userId, reservedAt: new Date().toISOString() }),
@@ -34,21 +31,23 @@ export const handler = async (event: SQSEvent) => {
             await dynamoDb.send(new PutItemCommand(params));
 
             console.log(`예약 성공 Seat reserved: eventId=${eventId}, seatId=${seatId}, userId=${userId}`);   // 예약 성공
-	    results.push({ statudsCode: 200, body: JSON.stringify({ message: "Seat reserved Successfully!!" }) });
+	    results.push({ statusCode: 200, body: JSON.stringify({ message: "Seat reserved Successfully!!" }) });
 
 	    await snsClient.send(new PublishCommand({
-  	    TopicArn: TOPIC_ARN,
-  	    Subject: "🎉 예약 성공!",
-  	    Message: `예약이 완료되었습니다.\nEvent ID: ${eventId}, Seat ID: ${seatId}, User ID: ${userId}`,
+  	    	TopicArn: TOPIC_ARN,
+  	    	Subject: "🎉 예약 성공!",
+  	    	Message: `예약이 완료되었습니다.\nEvent ID: ${eventId}, Seat ID: ${seatId}, User ID: ${userId}`,
 	    }));
   
         } catch (error: any) {
 		if (error.name === "ConditionalCheckFailedException") {
 			// 중복 예약 발생 시 명확한 메시지 출력
-			console.error(` 중복 예약 실패: eventId=${JSON.parse(record.body).eventId}, seatId=${JSON.parse(record.body).seatId}, userId=${JSON.parse(record.body).userId}`);
+			console.error(` 중복 예약 실패: eventId=${eventId}, seatId=${seatId}, userId=${userId}`);
+			throw new Error("중복 예약 - 이미 예약된 좌석입니다.");
 			results.push({ statusCode: 409, body: JSON.stringify({message: "The seat reserved already"})});
 		} else {
 			console.error("예약 처리 중 오류 발생:", error);
+			throw new Error("예약 처리 중 오류 발생");
 			results.push({ statusCode: 500, body: JSON.stringify({message: "Error"})});
         	}
     	}

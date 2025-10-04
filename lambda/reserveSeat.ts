@@ -4,6 +4,9 @@ import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
 const sqsClient = new SQSClient({});
 const QUEUE_URL = process.env.QUEUE_URL || "";
 
+// APIGatewayEvent : 사용자가 API Gateway로 보낸 HTTP 요청(메서드, 헤더, 바디 등)
+// context : Lambda실행 환경 정보 (함수 이름, 타임아웃, AWS Request ID 등)
+// async : 비동기함수, Promise 반환. (보통 resturn statusCode, body 형태로 반환)
 
 export const handler = async (event: APIGatewayEvent, context: Context) => {
     try {
@@ -11,6 +14,7 @@ export const handler = async (event: APIGatewayEvent, context: Context) => {
 
         if (!event.body) {
 		console.error(" event body가 없습니다!");
+		throw new Error("event body가 없습니다!");
 		return { statusCode: 400, body: JSON.stringify({ message: "Missing event body" }) };
 	}
         const { eventId, seatId, userId } = JSON.parse(event.body || "{}");
@@ -33,6 +37,7 @@ export const handler = async (event: APIGatewayEvent, context: Context) => {
         return { statusCode: 200, body: JSON.stringify({ message: "Reservation request queued" }) };
     } catch (error: any) {
         console.error("Error:", error);
+	throw new Error("reserveSeatLambda 에러 발생");
         return { statusCode: 500, body: JSON.stringify({ message: "Error queuing reservation", error: error.message }) };
     }
 

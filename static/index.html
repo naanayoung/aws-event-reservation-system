@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>이벤트 예약 시스템</title>
+</head>
+<body>
+  <h1>🎟️ 이벤트 좌석 예약</h1>
+
+  <h2>좌석 예약</h2>
+  <input type="text" id="eventId" placeholder="이벤트 ID">
+  <input type="text" id="seatId" placeholder="좌석 ID">
+  <input type="text" id="userId" placeholder="사용자 ID">
+  <button onclick="reserve()">예약</button>
+
+  <h2>예약 취소</h2>
+  <input type="text" id="cancelEventId" placeholder="이벤트 ID">
+  <input type="text" id="cancelSeatId" placeholder="좌석 ID">
+  <input type="text" id="cancelUserId" placeholder="사용자 ID">
+  <button onclick="cancel()">취소</button>
+
+  <h3>결과:</h3>
+  <pre id="result"></pre>
+
+  <script src="main.js"></script>
+</body>
+</html>
+

@@ -18,9 +18,14 @@ export const handler = async (event: APIGatewayEvent) => {
 
   const params = {
     TableName: TABLE_NAME,
-    Key: marshall({ eventId, seatId }),
+    Key: {
+	    eventId: { S: eventId },
+	    seatId: { S: seatId },
+    },
     ConditionExpression: "userId = :userId",
-    ExpressionAttributeValues: marshall({ ":userId": userId }),
+    ExpressionAttributeValues: {
+	    ":userId": { S: userId },
+    },
   };
 
   try {     // DynamoDB에 예약 삭제하라는 요청(DELETE) 보내기.
@@ -30,7 +35,6 @@ export const handler = async (event: APIGatewayEvent) => {
       statusCode: 200,
       body: JSON.stringify({ message: "Reservation cancelled successfully" }),
     };
-    console.log( "예약 취소 성공");
   } catch (error: any) {
     if (error.name === "ConditionalCheckFailedException") {
       console.log( "해당하는 예약이 없습니다. 403")
@@ -44,7 +48,6 @@ export const handler = async (event: APIGatewayEvent) => {
       statusCode: 500,
       body: JSON.stringify({ message: "Failed to cancel reservation", error: error.message }),
     };
-    console.log( "예약 취소 실패" );
   }
 };
 

@@ -112,13 +112,6 @@ cdk deploy ApplicationStack
 cdk deploy MonitoringStack
 ```
 
-### 콘솔에서 추가 설정
-다음 항목은 CDK 코드에 포함되지 않아 AWS 콘솔에서 직접 설정했습니다.
-
-- Lambda 함수의 VPC 연결 (Private Subnet 배치)
-- SQS Event Source의 Batch Size 조정 (1→5)
-- `reserveSeat` Lambda에 Provisioned Concurrency 적용
-
 ### API 호출 예시
 ```bash
 # 예약 요청
@@ -131,6 +124,7 @@ curl -X POST "https://<api-id>.execute-api.<region>.amazonaws.com/prod/cancel?ev
 ```
 
 ### 부하 테스트 (Artillery)
+- yml 파일 내 API ID 변경
 ```bash
 cd load-test
 artillery run cancel-reservation.yml

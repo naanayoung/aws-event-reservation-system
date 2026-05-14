@@ -1,6 +1,6 @@
 ---
 config:
-        target: "https://aol81v9mi1.execute-api.ap-northeast-2.amazonaws.com"
+        target: "https://a412g0v5ef.execute-api.ap-northeast-2.amazonaws.com"
         phases:
                 - duration: 10
                   arrivalRate: 100

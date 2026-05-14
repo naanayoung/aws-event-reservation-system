@@ -8,7 +8,9 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 
 interface MonitoringStackProps extends StackProps {
-	reserveLambda: lambda.IFunction;
+	// 실제 운영 트래픽은 reserveSeatAlias(prod)를 통해 흐르므로
+       	// 함수가 아니라 alias를 받아 지표를 모니터링한다. 	
+	reserveAlias: lambda.IFunction;
 	processLambda: lambda.IFunction;
 	cancelLambda: lambda.IFunction;
 	reservationTable: dynamodb.ITable;
@@ -18,20 +20,20 @@ export class MonitoringStack extends Stack {
   constructor(scope: Construct, id: string, props: MonitoringStackProps) {
     super(scope, id, props);
 
-    // ✅ SNS 알람 토픽 생성
+    // SNS 알람 토픽 생성
     const alarmTopic = new sns.Topic(this, 'MonitoringAlarmTopic');
     alarmTopic.addSubscription(new sns_subs.EmailSubscription('ekfrha0327@gmail.com'));
 
-    // ✅ 예약 요청 에러 알람
+    // 예약 요청 에러 알람
     const reserveAlarm = new cloudwatch.Alarm(this, 'ReserveErrorAlarm', {
-      metric: props.reserveLambda.metricErrors(),
+      metric: props.reserveAlias.metricErrors(),
       threshold: 1,
       evaluationPeriods: 1,
       alarmDescription: '예약 요청 처리 에러 발생',
     });
     reserveAlarm.addAlarmAction(new actions.SnsAction(alarmTopic));
 
-    // ✅ 예약 처리 에러 알람
+    // 예약 처리 에러 알람
     const processAlarm = new cloudwatch.Alarm(this, 'ProcessErrorAlarm', {
       metric: props.processLambda.metricErrors(),
       threshold: 1,
@@ -40,7 +42,7 @@ export class MonitoringStack extends Stack {
     });
     processAlarm.addAlarmAction(new actions.SnsAction(alarmTopic));
 
-    // ✅ 예약 취소 에러 알람
+    // 예약 취소 에러 알람
     const cancelAlarm = new cloudwatch.Alarm(this, 'CancelErrorAlarm', {
       metric: props.cancelLambda.metricErrors(),
       threshold: 1,
@@ -54,12 +56,12 @@ export class MonitoringStack extends Stack {
       dashboardName: 'EventReservationDashboard',
     });
 
-    // 예약 요청,처리 Lambda 에러를 하나의 그래프 위젯으로 통합
+    // 예약 요청(reserveAlias),처리 Lambda 에러를 하나의 그래프 위젯으로 통합
     dashboard.addWidgets(
       new cloudwatch.GraphWidget({
         title: '예약 요청 & 처리 Lambda 에러',
         left: [
-          props.reserveLambda.metricErrors({ label: 'Reserve Lambda Errors' }),
+          props.reserveAlias.metricErrors({ label: 'Reserve Lambda(Alias) Errors' }),
           props.processLambda.metricErrors({ label: 'Process Lambda Errors' }),
         ],
         width: 24
@@ -76,7 +78,7 @@ export class MonitoringStack extends Stack {
         width: 24
       }),
     );
-   
+
     // DynamoDB Throttled Requests 위젯
     dashboard.addWidgets(
       new cloudwatch.GraphWidget({

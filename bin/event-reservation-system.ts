@@ -25,8 +25,10 @@ const databaseStack = new DatabaseStack(app, 'DatabaseStack');
 
 // 애플리케이션 스택 생성
 // databaseStack의 reservationTable 보내기. lib/database/database-stack.ts에서 받
+// networkStack에서 vpc 받기
 const applicationStack = new ApplicationStack(app, 'ApplicationStack', {
 	reservationTable: databaseStack.reservationTable,
+	vpc: networkStack.vpc,
 });
 
 // 스토리지 스택 생성
@@ -34,7 +36,7 @@ const storageStack = new StorageStack(app, 'StorageStack');
 
 // 모니터링 스택 생성
 const monitoringStack = new MonitoringStack(app, 'MonitoringStack', {
-	reserveLambda: applicationStack.reserveSeatLambda,
+	reserveAlias: applicationStack.reserveSeatAlias,
 	processLambda: applicationStack.processReservationLambda,
 	cancelLambda: applicationStack.cancelReservationLambda,
 	reservationTable: databaseStack.reservationTable,

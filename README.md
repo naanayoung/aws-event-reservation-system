@@ -1,7 +1,7 @@
-# Serverless VPC 네트워크 설계와 비용 구조 비교 분석
+# Serverless 비동기 파이프라인 구축 및 운영
 
-서버리스 자원을 활용해 이벤트 예약 비동기 파이프라인을 설계하고,
-NAT Gateway와 VPC Endpoint 두 네트워크 구성의 비용 구조를 직접 비교 분석한 프로젝트입니다.
+서버리스 자원을 활용해 비동기 파이프라인을 설계하고 AWS CDK로 구현. 
+콘솔 설정을 코드로 변환하고, 배포·롤백·성능 장애 추적, NAT Gateway와 VPC Endpoint의 비용 구조 분석.
 
 ---
 
@@ -107,9 +107,6 @@ cdk deploy --all
 
 # 개별 스택 배포
 cdk deploy NetworkStack
-cdk deploy DatabaseStack
-cdk deploy ApplicationStack
-cdk deploy MonitoringStack
 ```
 
 ### API 호출 예시
@@ -127,7 +124,7 @@ curl -X POST "https://<api-id>.execute-api.<region>.amazonaws.com/prod/cancel?ev
 - yml 파일 내 API ID 변경
 ```bash
 cd load-test
-artillery run cancel-reservation.yml
+artillery run duplicate-reservation.yml
 ```
 
 ### 리소스 정리

@@ -1,7 +1,11 @@
 # Serverless 비동기 파이프라인 구축 및 운영
 
-서버리스 자원을 활용해 비동기 파이프라인을 설계하고 AWS CDK로 구현. 
-콘솔 설정을 코드로 변환하고, 배포·롤백·성능 장애 추적, NAT Gateway와 VPC Endpoint의 비용 구조 분석.
+이벤트 예약 시스템을 서버리스 비동기 파이프라인으로 설계하고 AWS CDK로 구현한 프로젝트.
+콘솔 설정을 코드로 일관화하고, 운영 중 마주친 장애를 추적·해결하는 사이클을 경험하는 것에 중점을 뒀습니다.
+
+- **IaC 일관화**: 콘솔 수동 설정을 모두 CDK로 전환해 코드와 인프라 상태를 일치시킴
+- **운영 장애 추적**: 빌드 산출물 문제, 롤백 정체, 콜드스타트 병목 등 서로 다른 계층의 장애를 진단·해결
+- **비용 구조 분석**: NAT Gateway vs VPC Endpoint 비교 시뮬레이션으로 36% 절감 시나리오 도출
 
 ---
 
@@ -58,9 +62,9 @@ Client → API Gateway → Lambda(reserveSeat) → SQS FIFO → Lambda(processRe
 - `processReservation` Lambda에서 DynamoDB 조건부 쓰기 (`attribute_not_exists(seatId)`) 적용
 - 재시도·중복 요청 상황에서도 좌석 중복 예약 방지
 
-**Cold Start 완화**
-- SQS Batch Size 1→5로 조정해 다건 요청 처리량 개선
-- 앞단 Lambda(`reserveSeat`)에 Provisioned Concurrency 적용으로 초기 응답 지연 완화
+**처리량과 콜드스타트**
+- SQS Batch Size 5로 설정해 다건 요청 처리량 확보
+- `reserveSeat`은 alias 경유로 호출되도록 구성해, 계정 동시성 한도 상향 후 Provisioned Concurrency 적용할 수 있는 구조로 준비
 
 **IaC 스택 분리**
 - AWS CDK로 Network, Application, Database, Storage, Monitoring, Compute 6개 스택을 역할 기준으로 분리
@@ -74,7 +78,7 @@ Client → API Gateway → Lambda(reserveSeat) → SQS FIFO → Lambda(processRe
 
 ## 비용 분석 결과
 
-AWS Pricing Calculator로 2-AZ 환경, 월 30만 건 요청 기준으로 두 네트워크 구성의 비용 구조를 시뮬레이션했습니다.
+NAT Gateway로 구축 후 비용 구조를 점검하면서 Private Subnet의 Lambda가 관리형 서비스에 접근하는 경로를 VPC Endpoint로 대체할 때의 비용을 비교 검토했습니다. AWS Pricing Calculator로 2-AZ 환경, 월 30만 건 요청 기준으로 시뮬레이션했습니다.
 
 | 구분 | 구성 | 비고 |
 |------|------|------|
@@ -152,7 +156,7 @@ aws-event-reservation-system/
 │   ├── processReservation.ts              # 예약 처리 핸들러
 │   └── cancelReservation.ts               # 예약 취소 핸들러
 ├── load-test/
-│   └── cancel-reservation.yml             # Artillery 부하 테스트 시나리오
+│   └── *.yml                              # Artillery 부하 테스트 시나리오
 ├── static/                                # S3에 배포되는 정적 페이지
 ├── cdk.json
 └── package.json
